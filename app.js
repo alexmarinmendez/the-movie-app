@@ -4,10 +4,15 @@ const cargarPeliculas = async () => {
         
         if (respuesta.status === 200) {
             const datos = await respuesta.json()
+
+            console.log(datos)
             
             let peliculas = ''
             datos.results.forEach(pelicula => {
-                peliculas += `<h1>${pelicula.title}</h1>`
+                peliculas += `<div class="pelicula">
+                <img class="poster" src="http://image.tmdb.org/t/p/w500/${pelicula.poster_path}">
+                <h3 class="titulo">${pelicula.title}</h3>
+                </div>`
             })
             document.getElementById('contenedor').innerHTML = peliculas
 
