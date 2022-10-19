@@ -1,6 +1,22 @@
+let pagina = 1
+const btnAnterior = document.getElementById('btnAnterior')
+const btnSiguiente = document.getElementById('btnSiguiente')
+
+btnSiguiente.addEventListener('click', () => {
+    pagina += 1
+    cargarPeliculas()
+})
+
+btnAnterior.addEventListener('click', () => {
+    if (pagina > 1) {
+        pagina -= 1
+        cargarPeliculas()
+    }
+})
+
 const cargarPeliculas = async () => {
     try {
-        const respuesta = await fetch('https://api.themoviedb.org/3/movie/popular?api_key=b11a474a2fd87941a8936c55c3cd38d7')
+        const respuesta = await fetch(`https://api.themoviedb.org/3/movie/popular?page=${pagina}&api_key=b11a474a2fd87941a8936c55c3cd38d7`)
         
         if (respuesta.status === 200) {
             const datos = await respuesta.json()
